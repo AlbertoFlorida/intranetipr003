@@ -1,0 +1,155 @@
+<section id="usuarios" class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4 mb-4">
+      <h1>Gestión de usuarios</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered align-middle small">
+          <colgroup>
+            <col style="width: 80px">
+            <col style="width: 180px">
+            <col style="width: 40px">
+            <col style="width: 40px">
+            <col style="width: 100px">
+            <col style="width: 160px">
+          </colgroup>
+          <thead class="table-light">
+            <tr>
+              <th>Usuario</th>
+              <th>Email</th>
+              <th class="text-center">User</th>
+              <th class="text-center">Admin</th>
+              <th>Contraseña</th>
+              <th class="text-nowrap">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- USUARIOS EXISTENTES -->
+            <tr *ngFor="let user of usuarios">
+              <td>{{ user.usuario }}</td>
+
+              <td class="text-center">
+                <input [(ngModel)]="user.email"
+                       [class]="editandoUsuario === user.usuario
+                                 ? 'form-control form-control-sm text-center input-activo'
+                                 : 'form-control form-control-sm text-center input-lectura'"
+                       style="max-width: 180px; height: 32px;" />
+              </td>
+
+              <td class="text-center">
+                <input type="checkbox"
+                       class="form-check-input"
+                       [checked]="user.roles.includes('ROLE_USER')"
+                       [disabled]="editandoUsuario !== user.usuario"
+                       (change)="actualizarRol(user, 'ROLE_USER', getCheckboxChecked($event))" />
+              </td>
+
+              <td class="text-center">
+                <input type="checkbox"
+                       class="form-check-input"
+                       [checked]="user.roles.includes('ROLE_ADMIN')"
+                       [disabled]="editandoUsuario !== user.usuario"
+                       (change)="actualizarRol(user, 'ROLE_ADMIN', getCheckboxChecked($event))" />
+              </td>
+
+              <td class="text-center">
+                <span *ngIf="editandoUsuario !== user.usuario">••••••••</span>
+                <input *ngIf="editandoUsuario === user.usuario"
+                       [(ngModel)]="user.nuevaPassword"
+                       type="password"
+                       class="form-control form-control-sm text-center input-activo"
+                       style="max-width: 180px; height: 32px;" />
+              </td>
+
+              <td class="text-nowrap">
+                <button *ngIf="editandoUsuario !== user.usuario"
+                        class="btn btn-sm btn-outline-primary me-1"
+                        [disabled]="editandoUsuario !== null || nuevoUsuarioActivo"
+                        (click)="editar(user)">Editar</button>
+
+                <button *ngIf="editandoUsuario === user.usuario"
+                        class="btn btn-sm btn-success me-1"
+                        (click)="guardar(user)">Guardar</button>
+
+                <button *ngIf="editandoUsuario === user.usuario"
+                        class="btn btn-sm btn-secondary me-1"
+                        (click)="cancelar()">Cancelar</button>
+
+                <button class="btn btn-sm btn-outline-danger"
+                        [disabled]="editandoUsuario !== null || nuevoUsuarioActivo"
+                        (click)="eliminar(user.usuario)">Borrar</button>
+              </td>
+            </tr>
+
+            <!-- NUEVO USUARIO -->
+            <tr>
+              <td>
+                <input [(ngModel)]="nuevoUsuario.usuario"
+                       [class]="nuevoUsuarioActivo
+                                 ? 'form-control form-control-sm text-center input-activo'
+                                 : 'form-control form-control-sm text-center input-lectura'"
+                       style="max-width: 150px; height: 32px;" />
+              </td>
+
+              <td class="text-center">
+                <input [(ngModel)]="nuevoUsuario.email"
+                       [class]="nuevoUsuarioActivo
+                                 ? 'form-control form-control-sm text-center input-activo'
+                                 : 'form-control form-control-sm text-center input-lectura'"
+                       style="max-width: 180px; height: 32px;" />
+              </td>
+
+              <td class="text-center">
+                <input class="form-check-input"
+                       type="checkbox"
+                       [checked]="nuevoUsuario.roles.includes('ROLE_USER')"
+                       [disabled]="!nuevoUsuarioActivo"
+                       (change)="actualizarRol(nuevoUsuario, 'ROLE_USER', getCheckboxChecked($event))" />
+              </td>
+
+              <td class="text-center">
+                <input class="form-check-input"
+                       type="checkbox"
+                       [checked]="nuevoUsuario.roles.includes('ROLE_ADMIN')"
+                       [disabled]="!nuevoUsuarioActivo"
+                       (change)="actualizarRol(nuevoUsuario, 'ROLE_ADMIN', getCheckboxChecked($event))" />
+              </td>
+
+              <td class="text-center">
+                <input [(ngModel)]="nuevoUsuario.password"
+                       type="password"
+                       [class]="nuevoUsuarioActivo
+                                 ? 'form-control form-control-sm text-center input-activo'
+                                 : 'form-control form-control-sm text-center input-lectura'"
+                       style="max-width: 180px; height: 32px;" />
+              </td>
+
+              <td class="text-nowrap">
+                <button *ngIf="!nuevoUsuarioActivo"
+                        class="btn btn-sm btn-outline-primary me-1"
+                        [disabled]="editandoUsuario !== null"
+                        (click)="activarNuevoUsuario()">➕ Nuevo usuario</button>
+
+                <button *ngIf="nuevoUsuarioActivo"
+                        class="btn btn-sm btn-success me-1"
+                        (click)="crearUsuario()">Guardar</button>
+
+                <button *ngIf="nuevoUsuarioActivo"
+                        class="btn btn-sm btn-secondary"
+                        (click)="cancelarNuevoUsuario()">Cancelar</button>
+
+                <div *ngIf="errorCreacion" class="text-danger small mt-1">
+                  {{ errorCreacion }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

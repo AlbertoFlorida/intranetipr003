@@ -1,0 +1,9 @@
+<header class="header">
+    <span *ngIf="getUsuario()">Bienvenido {{ getUsuario() }}</span>
+    <button class="logout-btn" (click)="logout()" title="Cerrar sesión">
+      <span class="material-icons">logout</span>
+    </button>
+  </header>
+
+
+  

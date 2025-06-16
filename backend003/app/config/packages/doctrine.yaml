@@ -1,0 +1,72 @@
+doctrine:
+  # --- ORACLE ADB ---
+  dbal:
+    driver: "oci8"
+    server_version: "19"
+    charset: AL32UTF8
+    connectstring: >
+      (description=
+        (retry_count=20)(retry_delay=3)
+        (address=(protocol=tcps)(port=1522)(host=adb.eu-madrid-1.oraclecloud.com))
+        (connect_data=(service_name=g4f8c55166eb63f_bdintranetipr_low.adb.oraclecloud.com))
+        (security=(ssl_server_dn_match=yes))
+      )
+    url: "%env(resolve:DATABASE_URL)%"
+    default_table_options:
+      charset: AL32UTF8
+    mapping_types:
+      enum: string
+    profiling_collect_backtrace: "%kernel.debug%"
+    use_savepoints: true
+
+  orm:
+    auto_generate_proxy_classes: true
+    enable_lazy_ghost_objects: true
+    report_fields_where_declared: true
+    validate_xml_mapping: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      App:
+        type: attribute
+        is_bundle: false
+        dir: "%kernel.project_dir%/src/Entity"
+        prefix: 'App\Entity'
+        alias: App
+
+# --- ORACLE XE LOCAL  ---
+#  dbal:
+#    driver: 'oci8'
+#    server_version: '11g'
+#    charset: UTF8
+#    url: '%env(resolve:DATABASE_URL)%'
+#    default_table_options:
+#      charset: utf8
+#      collate: utf8_unicode_ci
+#    profiling_collect_backtrace: '%kernel.debug%'
+#    use_savepoints: true
+
+when@test:
+  doctrine:
+    dbal:
+      dbname_suffix: "_test%env(default::TEST_TOKEN)%"
+
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      proxy_dir: "%kernel.build_dir%/doctrine/orm/Proxies"
+      query_cache_driver:
+        type: pool
+        pool: doctrine.system_cache_pool
+      result_cache_driver:
+        type: pool
+        pool: doctrine.result_cache_pool
+
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

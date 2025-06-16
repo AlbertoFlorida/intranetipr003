@@ -1,0 +1,46 @@
+<section id="preformado" class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4 mb-5">
+      <h1>Preformado de componentes</h1>
+    </div>
+  </div>
+
+  <!-- Formulario unificado -->
+  <div class="row">
+    <div class="col-md-6">
+      <p>Busqueda por código o por lectura de una orden de fabricación</p>
+      <form (ngSubmit)="loadPlanos()">
+        <div class="mb-3">
+          <label for="inputValue" class="form-label fw-bold">Introduce un código o realiza una lectura:</label>
+          <input type="text" id="inputValue" class="form-control text-uppercase" [(ngModel)]="inputValue" name="inputValue" autofocus
+            placeholder="98761B" required (keyup.enter)="loadPlanos()">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cabecera del resultado -->
+  <div class="row mt-4" *ngIf="planos.length > 0">
+    <div class="col-md-12">
+      <h4><strong>Código:</strong> {{ planos[0].cod }}</h4>
+      <!-- <h4><strong>Descripción:</strong> {{ planos[0].descrip }}</h4> -->
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="errorMessage">
+    <div class="col-md-12 text-danger">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <!-- Lista de planos -->
+  <div class="row mt-4" *ngIf="planos.length > 0">
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let plano of planosRelacionados">
+          {{ plano.codDescr }} - {{ plano.descrip }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,36 @@
+
+services:
+
+  backend:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./backend003/Dockerfile
+    container_name: backend_symfony
+    volumes:
+      - ./backend003/app:/var/www/html
+      - ./secrets/wallet:/opt/wallet:ro
+      - ./secrets/jwt:/var/www/html/config/jwt:ro
+      - ./secrets/.env.local:/var/www/html/.env.local:ro 
+    environment:
+      TNS_ADMIN: /opt/wallet
+    networks:
+      - intranet_net
+    ports:
+      - "8080:80"
+
+  frontend:
+    build:
+      context: ./frontend003
+      dockerfile: Dockerfile
+    container_name: frontend_nginx
+    volumes:
+      - ./frontend003/dist/intranet-ipr-frontend/browser:/usr/share/nginx/html:ro
+    ports:
+      - "4200:80"
+    networks:
+      - intranet_net
+
+networks:
+  intranet_net:
+    driver: bridge

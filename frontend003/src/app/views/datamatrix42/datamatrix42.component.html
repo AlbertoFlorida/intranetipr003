@@ -1,0 +1,22 @@
+<section id="datamatrix42" class="container">
+    <div class="row">
+        <div class="col-md-12 mt-4 mb-5">
+            <h1>Comprobación datamatrix 42</h1>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <p>Comprueba o configura un DATAMATRIX de 42 dígitos</p>
+        <div class="mb-3">
+            <label for="datamatrix" class="form-label fw-bold">Introduce un código:</label>
+            <input type="text" id="datamatrix" class="form-control" maxlength="44" placeholder="" autofocus
+                   [(ngModel)]="inputValue" autocomplete="off" (input)="checkInput()">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <table class="table table-bordered table-hover">
+                <!-- Aquí se generará la tabla dinámicamente -->
+            </table>
+        </div>
+    </div>
+</section>

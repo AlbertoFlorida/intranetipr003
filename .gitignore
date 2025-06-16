@@ -1,0 +1,38 @@
+# === Symfony ===
+/backend003/app/vendor/
+/backend003/app/var/
+/backend003/app/public/bundles/
+/backend003/app/public/build/
+
+/backend003/app/.env.local
+/backend003/app/.env.*.local
+/backend003/app/.env.local.php
+/backend003/app/.env.test.local
+
+/backend003/app/.phpunit.result.cache
+/backend003/app/.idea/
+/backend003/app/.vscode/
+backend003/app/logs/
+backend003/app/*.log
+
+# === Angular Frontend ===
+/frontend003/node_modules/
+/frontend003/dist/
+/frontend003/.angular/cache/
+/frontend003/.idea/
+/frontend003/.vscode/
+/frontend003/.sass-cache/
+/frontend003/.history/
+
+# === Proyecto Raíz ===
+/secrets/
+/oracle/
+/certs/
+/jwt/
+/env/
+
+/.DS_Store
+Thumbs.db
+
+# === Docker logs globales (opcional) ===
+*.log

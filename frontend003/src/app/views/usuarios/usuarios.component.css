@@ -1,0 +1,153 @@
+/* Estilos para la sección de usuarios */
+#usuarios {
+  font-size: 0.85rem;
+}
+
+#usuarios h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilos base para la tabla */
+.table {
+  table-layout: fixed; /* Fuerza el uso de los anchos definidos */
+  margin-bottom: 0;
+}
+
+/* Celdas compactas y alineación */
+.table td, .table th {
+  padding: 0.35rem 0.5rem !important;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cabecera de tabla */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 10;
+}
+
+/* Inputs generales */
+.table .form-control {
+  transition: none; /* Elimina animaciones que puedan causar parpadeo */
+  font-size: 0.8rem;
+  height: calc(1.5em + 0.5rem);
+  padding: 0.25rem 0.5rem;
+}
+
+/* Inputs en modo lectura (solo si no están activos ni tienen foco) */
+.table .form-control.border-0.bg-transparent:not(.input-activo):not(:focus) {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0;
+  cursor: default;
+  outline: none;
+}
+
+/* Checkboxes centrados */
+.table .form-check-input {
+  margin-left: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Botones compactos */
+.table .btn-sm {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.2;
+}
+
+/* Contenedor responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+/* Efecto hover para filas editables */
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Estilo para el mensaje de error */
+.text-danger.small {
+  font-size: 0.7rem;
+  margin-top: 0.2rem !important;
+}
+
+/* Asegura que los inputs de contraseña mantengan su ancho */
+input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mantiene la alineación de los checkboxes */
+td.text-center {
+  text-align: center !important;
+}
+
+/* Estilo para los placeholders de los inputs */
+.table .form-control::placeholder {
+  color: #6c757d;
+  opacity: 0.6;
+}
+
+/* Asegura que las celdas con texto largo no rompan el diseño */
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Asegurar que los inputs ocupen todo el ancho disponible */
+.table td .form-control {
+  width: 100%;
+  display: inline-block;
+}
+
+/* Estilo para placeholders en inputs centrados */
+.table .form-control.text-center::placeholder {
+  color: #6c757d;
+  opacity: 0.6;
+  text-align: center;
+}
+
+/* Ajuste fino para el texto en modo lectura */
+.table .form-control.bg-transparent {
+  text-align: center;
+  cursor: default;
+}
+
+.input-activo:focus {
+  border: 2px solid #0d6efd !important; /* Azul Bootstrap */
+  background-color: #e9f2ff !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.input-activo {
+  border: 1px solid #0d6efd !important;
+  background-color: #e9f2ff !important;
+  box-shadow: none !important;
+  outline: none;
+  cursor: text;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.input-activo:focus {
+  border: 2px solid #0d6efd !important;
+  background-color: #dbeeff !important;
+}
+
+.input-lectura {
+  border: none !important;
+  background-color: transparent !important;
+  cursor: default;
+  pointer-events: none;
+}

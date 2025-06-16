@@ -1,0 +1,21 @@
+parameters:
+    db_username: '%env(DB_USERNAME)%'
+    db_password: '%env(DB_PASSWORD)%'
+    db_connection_string: '%env(DB_CONNECTION_STRING)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\DataPersister\UserDataPersister:
+        decorates: 'api_platform.doctrine.orm.state.persist_processor'
+        arguments:
+            $decorated: '@App\DataPersister\UserDataPersister.inner'

@@ -1,0 +1,59 @@
+<nav id="sidebar" class="d-flex flex-column">
+        <ul class="nav flex-column">
+      
+          <li>
+            <img src="assets/images/fermax-03.png" id="logo" alt="Logo de la aplicación">
+          </li>
+      
+          <li>
+            <a class="nav-link text-white english"
+               routerLink="/home"
+               routerLinkActive="active"
+               aria-current="page">Inicio</a>
+          </li>
+      
+          <li>
+            <a class="nav-link text-white english"
+               routerLink="/digitocontrol"
+               routerLinkActive="active"
+               aria-current="page">Dígito control</a>
+          </li>
+      
+          <li>
+            <a class="nav-link text-white english"
+               routerLink="/datamatrix42"
+               routerLinkActive="active"
+               aria-current="page">Datamatrix42 </a>
+          </li>
+      
+          <li>
+            <a class="nav-link text-white english"
+               routerLink="/planos"
+               routerLinkActive="active"
+               aria-current="page">Planos</a>
+          </li>
+
+           <li>
+            <a class="nav-link text-white english"
+               routerLink="/comprobadores"
+               routerLinkActive="active"
+               aria-current="page">Comprobadores</a>
+          </li>
+
+             <li>
+            <a class="nav-link text-white english"
+               routerLink="/preformado"
+               routerLinkActive="active"
+               aria-current="page">Preformado</a>
+          </li>
+      
+          <li *ngIf="auth.hasAnyRole(['ROLE_ADMIN'])">
+            <a class="nav-link text-white english"
+               routerLink="/usuarios"
+               routerLinkActive="active"
+               aria-current="page">Usuarios</a>
+          </li>
+      
+        </ul>
+      </nav>
+      
